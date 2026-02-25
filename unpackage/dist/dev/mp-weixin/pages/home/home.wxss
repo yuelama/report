@@ -83,6 +83,13 @@
   box-sizing: border-box;
   background-color: #fafafa;
 }
+.picker-input.data-v-92bb8f34 {
+  display: flex;
+  align-items: center;
+}
+.picker-input.placeholder.data-v-92bb8f34 {
+  color: #bfbfbf;
+}
 .textarea.data-v-92bb8f34 {
   width: 100%;
   min-height: 120rpx;

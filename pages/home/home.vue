@@ -20,27 +20,32 @@
 
 		<!-- 工作报告编辑区域 -->
 		<view v-if="activeTab === 'new'" class="card form-card">
-		<!-- 	<view class="card-title">新建报告</view> -->
 			<view class="form-item">
-				<view class="form-item">
-					<text class="label">标题</text>
-					<input
-						class="input"
-						type="text"
-						placeholder="请输入工作报告标题"
-						v-model="form.title"
-					/>
-				</view>
-				
-				<text class="label">报告日期</text>
+				<text class="label">标题</text>
 				<input
 					class="input"
 					type="text"
-					placeholder="例如：2026-02-25"
-					v-model="form.date"
+					placeholder="请输入工作报告标题"
+					v-model="form.title"
 				/>
 			</view>
-			
+
+			<view class="form-item">
+				<text class="label">报告日期</text>
+				<picker
+					mode="date"
+					:value="form.date"
+					@change="onDateChange"
+				>
+					<view
+						class="input picker-input"
+						:class="{ placeholder: !form.date }"
+					>
+						{{ form.date || '请选择报告日期' }}
+					</view>
+				</picker>
+			</view>
+
 			<view class="form-item">
 				<text class="label">工作内容</text>
 				<textarea
@@ -151,6 +156,9 @@
 			switchTab(type) {
 				this.activeTab = type
 			},
+			onDateChange(e) {
+				this.form.date = e.detail.value
+			},
 			submitReport() {
 				if (!this.form.date || !this.form.title || !this.form.content) {
 					uni.showToast({
@@ -258,6 +266,15 @@
 		height: 60rpx;
 		box-sizing: border-box;
 		background-color: #fafafa;
+	}
+
+	.picker-input {
+		display: flex;
+		align-items: center;
+	}
+
+	.picker-input.placeholder {
+		color: #bfbfbf;
 	}
 
 	.textarea {

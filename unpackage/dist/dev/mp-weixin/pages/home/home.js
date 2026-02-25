@@ -269,6 +269,11 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -299,6 +304,9 @@ var _default = {
   methods: {
     switchTab: function switchTab(type) {
       this.activeTab = type;
+    },
+    onDateChange: function onDateChange(e) {
+      this.form.date = e.detail.value;
     },
     submitReport: function submitReport() {
       if (!this.form.date || !this.form.title || !this.form.content) {
