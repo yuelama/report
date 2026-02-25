@@ -1,13 +1,26 @@
 <!-- 用户资料页 -->
 <template>
 	<view class="uni-content">
-		<view class="avatar">
-			<uni-id-pages-avatar width="260rpx" height="260rpx"></uni-id-pages-avatar>
+		<!-- 头像和昵称卡片 -->
+		<view class="profile-card">
+			<view class="avatar">
+				<uni-id-pages-avatar width="200rpx" height="200rpx"></uni-id-pages-avatar>
+			</view>
+			<view class="profile-main">
+				<text class="profile-name">{{ userInfo.nickname || '未设置昵称' }}</text>
+				<text class="profile-id" v-if="userInfo._id">ID：{{ userInfo._id }}</text>
+			</view>
 		</view>
+
+		<!-- 基本信息 -->
 		<uni-list>
 			<uni-list-item class="item" @click="setNickname('')" title="昵称" :rightText="userInfo.nickname||'未设置'" link>
 			</uni-list-item>
-			<uni-list-item class="item" @click="bindMobile" title="手机号" :rightText="userInfo.mobile||'未绑定'" link>
+			<uni-list-item class="item" @click="setGender" title="性别" :rightText="userInfo.gender || '未设置'" link>
+			</uni-list-item>
+			<uni-list-item class="item" @click="bindMobile" title="手机号码" :rightText="userInfo.mobile||'未绑定'" link>
+			</uni-list-item>
+			<uni-list-item class="item" @click="setWechat('')" title="微信" :rightText="userInfo.wechat || '未设置'" link>
 			</uni-list-item>
 			<uni-list-item v-if="userInfo.email" class="item" title="电子邮箱" :rightText="userInfo.email">
 			</uni-list-item>
@@ -19,21 +32,53 @@
 			<uni-list-item v-if="hasPwd" class="item" @click="changePassword" title="修改密码" link>
 			</uni-list-item>
 		</uni-list>
+
+		<!-- 工作报告入口，与主页功能联动 -->
+	<!-- 	<uni-list class="mt10">
+			<uni-list-item
+				class="item"
+				title="我的工作报告"
+				note="查看历史工作报告及批语"
+				link
+				@click="toReportHistory"
+			></uni-list-item>
+		</uni-list> -->
 		<!-- #ifndef MP -->
 		<uni-list class="mt10">
 			<uni-list-item @click="deactivate" title="注销账号" link="navigateTo"></uni-list-item>
 		</uni-list>
 		<!-- #endif -->
 		<uni-popup ref="dialog" type="dialog">
-			<uni-popup-dialog mode="input" :value="userInfo.nickname" @confirm="setNickname" :inputType="setNicknameIng?'nickname':'text'"
-				title="设置昵称" placeholder="请输入要设置的昵称">
+			<uni-popup-dialog
+				mode="input"
+				:value="userInfo.nickname"
+				@confirm="setNickname"
+				:inputType="setNicknameIng ? 'nickname' : 'text'"
+				title="设置昵称"
+				placeholder="请输入要设置的昵称"
+			>
+			</uni-popup-dialog>
+		</uni-popup>
+
+		<uni-popup ref="wechatDialog" type="dialog">
+			<uni-popup-dialog
+				mode="input"
+				:value="tempWechat"
+				@confirm="setWechat"
+				title="设置微信"
+				placeholder="请输入微信号"
+			>
 			</uni-popup-dialog>
 		</uni-popup>
 		<uni-id-pages-bind-mobile ref="bind-mobile-by-sms" @success="bindMobileSuccess"></uni-id-pages-bind-mobile>
-		<template v-if="showLoginManage">
-			<button v-if="userInfo._id" @click="logout">退出登录</button>
-			<button v-else @click="login">去登录</button>
-		</template>
+
+		<button
+			v-if="userInfo._id"
+			class="logout-btn"
+			@click="logout"
+		>
+			退出登录
+		</button>
 	</view>
 </template>
 <script>
@@ -71,7 +116,8 @@ const uniIdCo = uniCloud.importObject("uni-id-co")
 				// },
 				hasPwd: false,
 				showLoginManage: false ,//通过页面传参隐藏登录&退出登录按钮
-				setNicknameIng:false
+				setNicknameIng:false,
+				tempWechat: ''
 			}
 		},
 		async onShow() {
@@ -169,9 +215,41 @@ const uniIdCo = uniCloud.importObject("uni-id-co")
 					this.$refs.dialog.open()
 				}
 			},
+			setGender() {
+				const list = ['男', '女', '保密']
+				uni.showActionSheet({
+					itemList: list,
+					success: (res) => {
+						const gender = list[res.tapIndex]
+						mutations.updateUserInfo({
+							gender
+						})
+					}
+				})
+			},
+			setWechat(wechat) {
+				if (wechat) {
+					mutations.updateUserInfo({
+						wechat
+					})
+					this.tempWechat = wechat
+					this.$refs.wechatDialog.close()
+				} else {
+					this.tempWechat = this.userInfo.wechat || ''
+					this.$refs.wechatDialog.open()
+				}
+			},
 			deactivate(){
 				uni.navigateTo({
 					url:"/uni_modules/uni-id-pages/pages/userinfo/deactivate/deactivate"
+				})
+			},
+			toReportHistory() {
+				uni.switchTab({
+					url: '/pages/home/home',
+					success: () => {
+						// 为了与首页联动，可通过事件总线或全局状态再次控制 tab，但这里仅做简单跳转
+					}
 				})
 			},
 			async bindThirdAccount(provider) {
@@ -244,11 +322,36 @@ const uniIdCo = uniCloud.importObject("uni-id-co")
 	}
 
 	/* #endif */
+	.profile-card {
+		flex-direction: row;
+		align-items: center;
+		padding: 20rpx 30rpx;
+		background-color: #ffffff;
+		border-radius: 20rpx;
+		margin: 20rpx 16rpx 10rpx;
+		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
+	}
+
 	.avatar {
 		align-items: center;
 		justify-content: center;
-		margin: 22px 0;
-		width: 100%;
+		margin-right: 20rpx;
+	}
+
+	.profile-main {
+		flex: 1;
+	}
+
+	.profile-name {
+		font-size: 32rpx;
+		color: #333333;
+		font-weight: 600;
+	}
+
+	.profile-id {
+		margin-top: 8rpx;
+		font-size: 24rpx;
+		color: #999999;
 	}
 
 	.item {
@@ -258,12 +361,13 @@ const uniIdCo = uniCloud.importObject("uni-id-co")
 		align-items: center;
 	}
 
-	button {
-		margin: 10%;
-		margin-top: 40px;
-		border-radius: 0;
-		background-color: #FFFFFF;
+	.logout-btn {
+		margin: 40px 10%;
+		border-radius: 999rpx;
+		background-color: #ff4d4f;
+		color: #ffffff;
 		width: 80%;
+		text-align: center;
 	}
 
 	.mt10 {

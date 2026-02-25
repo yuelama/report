@@ -222,6 +222,51 @@ var _store = __webpack_require__(/*! @/uni_modules/uni-id-pages/common/store.js 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var uniIdCo = uniCloud.importObject("uni-id-co");
 var _default = {
@@ -254,7 +299,8 @@ var _default = {
       hasPwd: false,
       showLoginManage: false,
       //通过页面传参隐藏登录&退出登录按钮
-      setNicknameIng: false
+      setNicknameIng: false,
+      tempWechat: ''
     };
   },
   onShow: function onShow() {
@@ -380,9 +426,41 @@ var _default = {
         this.$refs.dialog.open();
       }
     },
+    setGender: function setGender() {
+      var list = ['男', '女', '保密'];
+      uni.showActionSheet({
+        itemList: list,
+        success: function success(res) {
+          var gender = list[res.tapIndex];
+          _store.mutations.updateUserInfo({
+            gender: gender
+          });
+        }
+      });
+    },
+    setWechat: function setWechat(wechat) {
+      if (wechat) {
+        _store.mutations.updateUserInfo({
+          wechat: wechat
+        });
+        this.tempWechat = wechat;
+        this.$refs.wechatDialog.close();
+      } else {
+        this.tempWechat = this.userInfo.wechat || '';
+        this.$refs.wechatDialog.open();
+      }
+    },
     deactivate: function deactivate() {
       uni.navigateTo({
         url: "/uni_modules/uni-id-pages/pages/userinfo/deactivate/deactivate"
+      });
+    },
+    toReportHistory: function toReportHistory() {
+      uni.switchTab({
+        url: '/pages/home/home',
+        success: function success() {
+          // 为了与首页联动，可通过事件总线或全局状态再次控制 tab，但这里仅做简单跳转
+        }
       });
     },
     bindThirdAccount: function bindThirdAccount(provider) {

@@ -152,6 +152,11 @@
 				nextId: 3
 			}
 		},
+		onLoad(options) {
+			if (options && options.tab === 'history') {
+				this.activeTab = 'history'
+			}
+		},
 		methods: {
 			switchTab(type) {
 				this.activeTab = type

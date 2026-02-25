@@ -301,6 +301,11 @@ var _default = {
       nextId: 3
     };
   },
+  onLoad: function onLoad(options) {
+    if (options && options.tab === 'history') {
+      this.activeTab = 'history';
+    }
+  },
   methods: {
     switchTab: function switchTab(type) {
       this.activeTab = type;
