@@ -1,6 +1,118 @@
 <template>
-	<view class="content">
-		<text>主页内容</text>
+	<view class="page">
+		<!-- 顶部切换 tabs -->
+		<view class="tabs">
+			<view
+				class="tab-item"
+				:class="{ active: activeTab === 'new' }"
+				@click="switchTab('new')"
+			>
+				新建报告
+			</view>
+			<view
+				class="tab-item"
+				:class="{ active: activeTab === 'history' }"
+				@click="switchTab('history')"
+			>
+				历史报告
+			</view>
+		</view>
+
+		<!-- 工作报告编辑区域 -->
+		<view v-if="activeTab === 'new'" class="card form-card">
+		<!-- 	<view class="card-title">新建报告</view> -->
+			<view class="form-item">
+				<view class="form-item">
+					<text class="label">标题</text>
+					<input
+						class="input"
+						type="text"
+						placeholder="请输入工作报告标题"
+						v-model="form.title"
+					/>
+				</view>
+				
+				<text class="label">报告日期</text>
+				<input
+					class="input"
+					type="text"
+					placeholder="例如：2026-02-25"
+					v-model="form.date"
+				/>
+			</view>
+			
+			<view class="form-item">
+				<text class="label">工作内容</text>
+				<textarea
+					class="textarea"
+					placeholder="请填写今日主要工作内容、进展情况等"
+					v-model="form.content"
+					auto-height
+				/>
+			</view>
+			<button class="submit-btn" type="primary" @click="submitReport">
+				提交报告（仅前端示例）
+			</button>
+		</view>
+
+		<!-- 历史工作报告列表 -->
+		<view v-if="activeTab === 'history'" class="card list-card">
+			<view class="card-title">历史报告</view>
+			<view v-if="reports.length === 0" class="empty-text">
+				暂无报告记录
+			</view>
+			<scroll-view
+				v-else
+				class="list-scroll"
+				scroll-y="true"
+			>
+				<view
+					v-for="item in reports"
+					:key="item.id"
+					class="report-item"
+					@click="viewDetail(item)"
+				>
+					<view class="report-main">
+						<view class="report-title">{{ item.title }}</view>
+						<view class="report-date">{{ item.date }}</view>
+					</view>
+					<view class="report-status">
+						<text
+							class="status-tag"
+							:class="item.leaderComment ? 'status-done' : 'status-pending'"
+						>
+							{{ item.leaderComment ? '已批复' : '待批复' }}
+						</text>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+
+		<!-- 报告详情 + 领导批语（仅在历史报告 tab 下显示） -->
+		<view v-if="activeTab === 'history' && selectedReport" class="card detail-card">
+			<view class="detail-header">
+				<view class="card-title">报告详情</view>
+				<text class="detail-close" @click="closeDetail">关闭</text>
+			</view>
+			<view class="detail-field">
+				<text class="detail-label">日期：</text>
+				<text class="detail-value">{{ selectedReport.date }}</text>
+			</view>
+			<view class="detail-field">
+				<text class="detail-label">标题：</text>
+				<text class="detail-value">{{ selectedReport.title }}</text>
+			</view>
+			<view class="detail-field detail-content">
+				<text class="detail-label">工作内容：</text>
+				<text class="detail-value">{{ selectedReport.content }}</text>
+			</view>
+			<view class="detail-field detail-comment">
+				<text class="detail-label">领导批语：</text>
+				<text class="detail-value">
+					{{ selectedReport.leaderComment || '暂未批复' }}
+				</text>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -8,22 +120,254 @@
 	export default {
 		data() {
 			return {
+				activeTab: 'new',
+				form: {
+					date: '',
+					title: '',
+					content: ''
+				},
+				// 模拟历史数据，仅前端展示使用
+				reports: [
+					{
+						id: 1,
+						date: '2026-02-24',
+						title: '日常工作汇报',
+						content: '1. 完成项目 A 模块联调\n2. 跟进 B 需求评审\n3. 处理线上工单 2 个',
+						leaderComment: '整体进展良好，请注意与测试组同步时间计划。'
+					},
+					{
+						id: 2,
+						date: '2026-02-23',
+						title: '周工作总结',
+						content: '本周完成核心功能开发，风险点已提前暴露并跟进。',
+						leaderComment: '辛苦了，下周重点关注性能压测结果。'
+					}
+				],
+				selectedReport: null,
+				nextId: 3
 			}
 		},
-		onLoad() {
-		},
 		methods: {
+			switchTab(type) {
+				this.activeTab = type
+			},
+			submitReport() {
+				if (!this.form.date || !this.form.title || !this.form.content) {
+					uni.showToast({
+						title: '请先完善报告信息',
+						icon: 'none'
+					})
+					return
+				}
+
+				const newReport = {
+					id: this.nextId++,
+					date: this.form.date,
+					title: this.form.title,
+					content: this.form.content,
+					leaderComment: '' // 新增报告暂时没有批语
+				}
+
+				// 新增记录放在列表最前面
+				this.reports.unshift(newReport)
+
+				// 清空表单
+				this.form.date = ''
+				this.form.title = ''
+				this.form.content = ''
+
+				uni.showToast({
+					title: '已新增到本地列表',
+					icon: 'success'
+				})
+			},
+			viewDetail(item) {
+				this.selectedReport = item
+			},
+			closeDetail() {
+				this.selectedReport = null
+			}
 		}
 	}
 </script>
 
-<style>
-	.content {
+<style lang="scss" scoped>
+	.page {
+		padding: 16rpx;
+		background-color: #f5f5f5;
+		min-height: 100vh;
+		box-sizing: border-box;
+	}
+
+	.tabs {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		background-color: #ffffff;
+		border-radius: 16rpx;
+		margin-bottom: 20rpx;
+		overflow: hidden;
+	}
+
+	.tab-item {
+		flex: 1;
+		text-align: center;
+		padding: 18rpx 0;
+		font-size: 28rpx;
+		color: #666666;
+	}
+
+	.tab-item.active {
+		color: #007aff;
+		font-weight: 600;
+		background-color: #e8f2ff;
+	}
+
+	.card {
+		background-color: #ffffff;
+		border-radius: 16rpx;
+		padding: 24rpx;
+		margin-bottom: 20rpx;
+		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
+	}
+
+	.card-title {
+		font-size: 32rpx;
+		font-weight: 600;
+		margin-bottom: 20rpx;
+		color: #333333;
+	}
+
+	.form-item {
+		margin-bottom: 20rpx;
+	}
+
+	.label {
+		font-size: 26rpx;
+		color: #666666;
+		margin-bottom: 8rpx;
+		display: block;
+	}
+
+	.input {
+		width: 100%;
+		border-radius: 8rpx;
+		border: 1rpx solid #e0e0e0;
+		padding: 8rpx 16rpx;
+		font-size: 28rpx;
+		line-height: 60rpx;
+		height: 60rpx;
+		box-sizing: border-box;
+		background-color: #fafafa;
+	}
+
+	.textarea {
+		width: 100%;
+		min-height: 120rpx;
+		border-radius: 8rpx;
+		border: 1rpx solid #e0e0e0;
+		padding: 8rpx 16rpx;
+		font-size: 28rpx;
+		line-height: 40rpx;
+		box-sizing: border-box;
+		background-color: #fafafa;
+	}
+
+	.submit-btn {
+		margin-top: 8rpx;
+	}
+
+	.list-card {
+		max-height: 420rpx;
+	}
+
+	.list-scroll {
+		max-height: 360rpx;
+	}
+
+	.report-item {
+		padding: 18rpx 10rpx;
+		border-bottom: 1rpx solid #f0f0f0;
+		display: flex;
+		flex-direction: row;
 		align-items: center;
-		justify-content: center;
-		padding: 6rpx;
-		height: 100vh;
+		justify-content: space-between;
+	}
+
+	.report-item:last-child {
+		border-bottom-width: 0;
+	}
+
+	.report-main {
+		flex: 1;
+		margin-right: 16rpx;
+	}
+
+	.report-title {
+		font-size: 30rpx;
+		color: #333333;
+		margin-bottom: 6rpx;
+	}
+
+	.report-date {
+		font-size: 24rpx;
+		color: #999999;
+	}
+
+	.report-status {
+	}
+
+	.status-tag {
+		font-size: 22rpx;
+		padding: 4rpx 12rpx;
+		border-radius: 20rpx;
+	}
+
+	.status-done {
+		background-color: #e6f7ff;
+		color: #1890ff;
+	}
+
+	.status-pending {
+		background-color: #fff7e6;
+		color: #fa8c16;
+	}
+
+	.detail-card {
+	}
+
+	.detail-header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 12rpx;
+	}
+
+	.detail-close {
+		font-size: 26rpx;
+		color: #1890ff;
+	}
+
+	.detail-field {
+		margin-bottom: 10rpx;
+	}
+
+	.detail-label {
+		font-size: 26rpx;
+		color: #666666;
+	}
+
+	.detail-value {
+		font-size: 28rpx;
+		color: #333333;
+		white-space: pre-wrap;
+	}
+
+	.detail-content {
+		margin-top: 8rpx;
+	}
+
+	.detail-comment {
+		margin-top: 8rpx;
 	}
 </style>

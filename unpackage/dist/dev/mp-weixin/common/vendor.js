@@ -94,9 +94,9 @@ module.exports = _defineProperty, module.exports.__esModule = true, module.expor
 /***/ }),
 
 /***/ 111:
-/*!***************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-id-pages/pages/register/validator.js ***!
-  \***************************************************************************/
+/*!**********************************************************************!*\
+  !*** D:/report/uni_modules/uni-id-pages/pages/register/validator.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -170,9 +170,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 112:
-/*!******************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-id-pages/common/password.js ***!
-  \******************************************************************/
+/*!*************************************************************!*\
+  !*** D:/report/uni_modules/uni-id-pages/common/password.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -414,9 +414,9 @@ module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true
 /***/ }),
 
 /***/ 169:
-/*!***********************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-id-pages/common/check-id-card.js ***!
-  \***********************************************************************/
+/*!******************************************************************!*\
+  !*** D:/report/uni_modules/uni-id-pages/common/check-id-card.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3015,9 +3015,9 @@ module.exports = _nonIterableSpread, module.exports.__esModule = true, module.ex
 /***/ }),
 
 /***/ 219:
-/*!**************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-popup/components/uni-popup/popup.js ***!
-  \**************************************************************************/
+/*!*********************************************************************!*\
+  !*** D:/report/uni_modules/uni-popup/components/uni-popup/popup.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3594,9 +3594,9 @@ function resolveLocaleChain(locale) {
 /***/ }),
 
 /***/ 220:
-/*!*******************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
-  \*******************************************************************************/
+/*!**************************************************************************!*\
+  !*** D:/report/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3621,9 +3621,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 221:
-/*!******************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
-  \******************************************************************************/
+/*!*************************************************************************!*\
+  !*** D:/report/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
+  \*************************************************************************/
 /*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
 /***/ (function(module) {
 
@@ -3632,9 +3632,9 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"cancel\",\"uni-popup.ok\":\
 /***/ }),
 
 /***/ 222:
-/*!***********************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
-  \***********************************************************************************/
+/*!******************************************************************************!*\
+  !*** D:/report/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
+  \******************************************************************************/
 /*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
 /***/ (function(module) {
 
@@ -3643,9 +3643,9 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\
 /***/ }),
 
 /***/ 223:
-/*!***********************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
-  \***********************************************************************************/
+/*!******************************************************************************!*\
+  !*** D:/report/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
+  \******************************************************************************/
 /*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
 /***/ (function(module) {
 
@@ -9781,9 +9781,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 26:
-/*!*********************************!*\
-  !*** D:/test-report/pages.json ***!
-  \*********************************/
+/*!****************************!*\
+  !*** D:/report/pages.json ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10325,7 +10325,7 @@ var b = "development" === "development",
   k = "true" === undefined || !0 === undefined,
   A = T([]),
   P = "h5" === E ? "web" : "app-plus" === E || "app-harmony" === E ? "app" : E,
-  C = T({"address":["127.0.0.1","198.18.0.1","192.168.1.35","192.168.169.1","192.168.50.1"],"servePort":7000,"debugPort":9000,"initialLaunchType":"local","skipFiles":["<node_internals>/**","D:/HBuilderX/plugins/unicloud/**/*.js"]}),
+  C = T({"address":["127.0.0.1","198.18.0.1","192.168.1.35","192.168.169.1","192.168.50.1"],"servePort":7000,"debugPort":9000,"initialLaunchType":"remote","skipFiles":["<node_internals>/**","D:/HBuilderX/plugins/unicloud/**/*.js"]}),
   O = T([{"provider":"aliyun","spaceName":"report","spaceId":"mp-57923f48-f74b-4a5c-9aea-6c40eba72f05","clientSecret":"eDpdFP5M067zVWtsmMAL4A==","endpoint":"https://api.next.bspapp.com"}]) || [],
   x = true;
 var N = "";
@@ -18202,9 +18202,9 @@ exports.default = er;
 /***/ }),
 
 /***/ 273:
-/*!*****************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-forms/components/uni-forms/validate.js ***!
-  \*****************************************************************************/
+/*!************************************************************************!*\
+  !*** D:/report/uni_modules/uni-forms/components/uni-forms/validate.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18894,9 +18894,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 274:
-/*!**************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-forms/components/uni-forms/utils.js ***!
-  \**************************************************************************/
+/*!*********************************************************************!*\
+  !*** D:/report/uni_modules/uni-forms/components/uni-forms/utils.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19566,9 +19566,9 @@ module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.e
 /***/ }),
 
 /***/ 296:
-/*!***************************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
-  \***************************************************************************************/
+/*!**********************************************************************************!*\
+  !*** D:/report/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19593,9 +19593,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 297:
-/*!**************************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
-  \**************************************************************************************/
+/*!*********************************************************************************!*\
+  !*** D:/report/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
+  \*********************************************************************************/
 /*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
 /***/ (function(module) {
 
@@ -19604,9 +19604,9 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show mo
 /***/ }),
 
 /***/ 298:
-/*!*******************************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
-  \*******************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** D:/report/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
+  \**************************************************************************************/
 /*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
 /***/ (function(module) {
 
@@ -19615,9 +19615,9 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多
 /***/ }),
 
 /***/ 299:
-/*!*******************************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
-  \*******************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** D:/report/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
+  \**************************************************************************************/
 /*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
 /***/ (function(module) {
 
@@ -19715,9 +19715,9 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 /***/ }),
 
 /***/ 312:
-/*!**************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-icons/components/uni-icons/icons.js ***!
-  \**************************************************************************/
+/*!*********************************************************************!*\
+  !*** D:/report/uni_modules/uni-icons/components/uni-icons/icons.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20765,9 +20765,9 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 /***/ }),
 
 /***/ 327:
-/*!**********************************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
-  \**********************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** D:/report/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20996,9 +20996,9 @@ module.exports = _isNativeFunction, module.exports.__esModule = true, module.exp
 /***/ }),
 
 /***/ 37:
-/*!**************************************************************!*\
-  !*** D:/test-report/pages.json?{"type":"origin-pages-json"} ***!
-  \**************************************************************/
+/*!*********************************************************!*\
+  !*** D:/report/pages.json?{"type":"origin-pages-json"} ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21011,6 +21011,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   "pages": [{
+    "path": "pages/home/home",
+    "style": {
+      "navigationBarTitleText": "主页"
+    }
+  }, {
     "path": "pages/index/index",
     "style": {
       "navigationBarTitleText": "uni-app"
@@ -21096,6 +21101,23 @@ var _default = {
     "navigationBarBackgroundColor": "#FFF",
     "backgroundColor": "#F8F8F8"
   },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "pages/home/home",
+      "text": "主页",
+      "iconPath": "static/tabbar/home.png",
+      "selectedIconPath": "static/tabbar/home-active.png"
+    }, {
+      "pagePath": "uni_modules/uni-id-pages/pages/userinfo/userinfo",
+      "text": "我的",
+      "iconPath": "static/tabbar/user.png",
+      "selectedIconPath": "static/tabbar/user-active.png"
+    }]
+  },
   "condition": {
     "current": 0,
     "list": [{
@@ -21115,9 +21137,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 38:
-/*!*************************************************!*\
-  !*** D:/test-report/pages.json?{"type":"stat"} ***!
-  \*************************************************/
+/*!********************************************!*\
+  !*** D:/report/pages.json?{"type":"stat"} ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21152,9 +21174,9 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ }),
 
 /***/ 42:
-/*!*******************************************************!*\
-  !*** D:/test-report/uni_modules/uni-id-pages/init.js ***!
-  \*******************************************************/
+/*!**************************************************!*\
+  !*** D:/report/uni_modules/uni-id-pages/init.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21289,9 +21311,9 @@ function _ref() {
 /***/ }),
 
 /***/ 43:
-/*!*********************************************************!*\
-  !*** D:/test-report/uni_modules/uni-id-pages/config.js ***!
-  \*********************************************************/
+/*!****************************************************!*\
+  !*** D:/report/uni_modules/uni-id-pages/config.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21532,9 +21554,9 @@ module.exports = _arrayWithHoles, module.exports.__esModule = true, module.expor
 /***/ }),
 
 /***/ 69:
-/*!***************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-id-pages/common/store.js ***!
-  \***************************************************************/
+/*!**********************************************************!*\
+  !*** D:/report/uni_modules/uni-id-pages/common/store.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21841,9 +21863,9 @@ module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, 
 /***/ }),
 
 /***/ 86:
-/*!**************************************************************************!*\
-  !*** D:/test-report/uni_modules/uni-id-pages/common/login-page.mixin.js ***!
-  \**************************************************************************/
+/*!*********************************************************************!*\
+  !*** D:/report/uni_modules/uni-id-pages/common/login-page.mixin.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
