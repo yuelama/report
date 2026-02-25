@@ -131,31 +131,18 @@
 					title: '',
 					content: ''
 				},
-				// 模拟历史数据，仅前端展示使用
-				reports: [
-					{
-						id: 1,
-						date: '2026-02-24',
-						title: '日常工作汇报',
-						content: '1. 完成项目 A 模块联调\n2. 跟进 B 需求评审\n3. 处理线上工单 2 个',
-						leaderComment: '整体进展良好，请注意与测试组同步时间计划。'
-					},
-					{
-						id: 2,
-						date: '2026-02-23',
-						title: '周工作总结',
-						content: '本周完成核心功能开发，风险点已提前暴露并跟进。',
-						leaderComment: '辛苦了，下周重点关注性能压测结果。'
-					}
-				],
-				selectedReport: null,
-				nextId: 3
+				// 历史报告列表，从云端查询
+				reports: [],
+				selectedReport: null
 			}
 		},
-		onLoad(options) {
+		async onLoad(options) {
 			if (options && options.tab === 'history') {
 				this.activeTab = 'history'
 			}
+
+			// 进入页面时拉取当前用户的历史报告
+			await this.fetchReports()
 		},
 		methods: {
 			switchTab(type) {
@@ -164,7 +151,7 @@
 			onDateChange(e) {
 				this.form.date = e.detail.value
 			},
-			submitReport() {
+			async submitReport() {
 				if (!this.form.date || !this.form.title || !this.form.content) {
 					uni.showToast({
 						title: '请先完善报告信息',
@@ -173,26 +160,58 @@
 					return
 				}
 
-				const newReport = {
-					id: this.nextId++,
-					date: this.form.date,
-					title: this.form.title,
-					content: this.form.content,
-					leaderComment: '' // 新增报告暂时没有批语
-				}
+				// 调用云对象，将报告保存到云数据库
+				try {
+					const crudBaogao = uniCloud.importObject('crud-baogao')
+					const res = await crudBaogao.addReport({
+						date: this.form.date,
+						title: this.form.title,
+						content: this.form.content
+					})
 
-				// 新增记录放在列表最前面
-				this.reports.unshift(newReport)
+					if (res && res.errCode === 0) {
+						// 新增成功后重新获取历史列表
+						await this.fetchReports()
+
+						uni.showToast({
+							title: '提交成功',
+							icon: 'success'
+						})
+					} else {
+						uni.showToast({
+							title: (res && (res.errMsg || res.message)) || '提交失败',
+							icon: 'none'
+						})
+						return
+					}
+				} catch (err) {
+					console.error(err)
+					uni.showToast({
+						title: '提交失败',
+						icon: 'none'
+					})
+					return
+				}
 
 				// 清空表单
 				this.form.date = ''
 				this.form.title = ''
 				this.form.content = ''
-
-				uni.showToast({
-					title: '已新增到本地列表',
-					icon: 'success'
-				})
+			},
+			// 从云端查询当前用户的历史报告
+			async fetchReports() {
+				try {
+					const crudBaogao = uniCloud.importObject('crud-baogao')
+					const res = await crudBaogao.listReports()
+					if (res && res.errCode === 0) {
+						this.reports = res.data || []
+					} else {
+						this.reports = []
+					}
+				} catch (err) {
+					console.error(err)
+					this.reports = []
+				}
 			},
 			viewDetail(item) {
 				this.selectedReport = item

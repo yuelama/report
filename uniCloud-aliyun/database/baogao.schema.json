@@ -1,0 +1,47 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [
+		"uid",
+		"title",
+		"date",
+		"content"
+	],
+	"permission": {
+		// 通过云对象访问，此处全部关闭客户端直连权限
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"uid": {
+			"bsonType": "string",
+			"description": "报告所属用户 uid"
+		},
+		"title": {
+			"bsonType": "string",
+			"description": "报告标题"
+		},
+		"date": {
+			"bsonType": "string",
+			"description": "报告日期，格式如 2026-02-25"
+		},
+		"content": {
+			"bsonType": "string",
+			"description": "工作内容"
+		},
+		"leaderComment": {
+			"bsonType": "string",
+			"description": "领导批语",
+			"default": ""
+		},
+		"createTime": {
+			"bsonType": "timestamp",
+			"description": "创建时间"
+		}
+	}
+}
