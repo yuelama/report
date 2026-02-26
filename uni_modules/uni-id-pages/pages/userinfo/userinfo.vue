@@ -16,7 +16,7 @@
 		<uni-list>
 			<uni-list-item class="item" @click="setNickname('')" title="昵称" :rightText="userInfo.nickname||'未设置'" link>
 			</uni-list-item>
-			<uni-list-item class="item" @click="setGender" title="性别" :rightText="userInfo.gender || '未设置'" link>
+			<uni-list-item class="item" @click="setGender" title="性别" :rightText="genderText" link>
 			</uni-list-item>
 			<uni-list-item class="item" @click="bindMobile" title="手机号码" :rightText="userInfo.mobile||'未绑定'" link>
 			</uni-list-item>
@@ -98,6 +98,20 @@ const uniIdCo = uniCloud.importObject("uni-id-co")
 		  }
 
 		  return this.userInfo.realNameAuth.authStatus
+	  },
+	  genderText () {
+		  const gender = this.userInfo.gender
+		  if (gender === '男' || gender === '女' || gender === '保密') {
+			  return gender
+		  }
+		  if (gender === 0 || gender === 1 || gender === 2) {
+			  return {
+				  0: '保密',
+				  1: '男',
+				  2: '女'
+			  }[gender]
+		  }
+		  return '未设置'
 	  }
     },
 		data() {
@@ -220,7 +234,7 @@ const uniIdCo = uniCloud.importObject("uni-id-co")
 				uni.showActionSheet({
 					itemList: list,
 					success: (res) => {
-						const gender = list[res.tapIndex]
+						const gender = [1, 2, 0][res.tapIndex]
 						mutations.updateUserInfo({
 							gender
 						})

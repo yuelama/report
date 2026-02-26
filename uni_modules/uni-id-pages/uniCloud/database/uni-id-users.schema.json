@@ -129,7 +129,7 @@
 			"title": "性别",
 			"permission": {
 				"read": "doc._id == auth.uid || 'READ_UNI_ID_USERS' in auth.permission",
-				"write": "'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
+				"write": "doc._id == auth.uid || 'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
 			}
 		},
 		"invite_time": {
@@ -193,6 +193,16 @@
 			"permission": {
 				"read": "doc._id == auth.uid || 'READ_UNI_ID_USERS' in auth.permission",
 				"write": "'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
+			}
+		},
+		"wechat": {
+			"bsonType": "string",
+			"description": "微信号",
+			"title": "微信",
+			"trim": "both",
+			"permission": {
+				"read": "doc._id == auth.uid || 'READ_UNI_ID_USERS' in auth.permission",
+				"write": "doc._id == auth.uid || 'CREATE_UNI_ID_USERS' in auth.permission || 'UPDATE_UNI_ID_USERS' in auth.permission"
 			}
 		},
 		"my_invite_code": {

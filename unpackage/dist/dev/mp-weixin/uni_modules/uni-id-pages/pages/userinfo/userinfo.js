@@ -279,6 +279,20 @@ var _default = {
         return 0;
       }
       return this.userInfo.realNameAuth.authStatus;
+    },
+    genderText: function genderText() {
+      var gender = this.userInfo.gender;
+      if (gender === '男' || gender === '女' || gender === '保密') {
+        return gender;
+      }
+      if (gender === 0 || gender === 1 || gender === 2) {
+        return {
+          0: '保密',
+          1: '男',
+          2: '女'
+        }[gender];
+      }
+      return '未设置';
     }
   },
   data: function data() {
@@ -431,7 +445,7 @@ var _default = {
       uni.showActionSheet({
         itemList: list,
         success: function success(res) {
-          var gender = list[res.tapIndex];
+          var gender = [1, 2, 0][res.tapIndex];
           _store.mutations.updateUserInfo({
             gender: gender
           });

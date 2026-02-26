@@ -21669,7 +21669,7 @@ var mutations = {
               });
               _context.prev = 6;
               _context.next = 9;
-              return usersTable.where("'_id' == $cloudEnv_uid").field('mobile,nickname,username,email,avatar_file').get();
+              return usersTable.where("'_id' == $cloudEnv_uid").field('mobile,nickname,username,email,avatar_file,gender,wechat').get();
             case 9:
               res = _context.sent;
               _context.next = 12;
